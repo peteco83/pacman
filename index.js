@@ -31,7 +31,9 @@ function gameOver(pacman, grid) {}
 
 function checkCollision(pacman, ghosts) {}
 
-function gameLoop(pacman, ghosts) {}
+function gameLoop(pacman, ghosts) {
+  gameBoard.moveCharacter(pacman);
+}
 
 function startGame() {
   gameWin = false;
@@ -47,6 +49,8 @@ function startGame() {
   document.addEventListener("keydown", (e) =>
     pacman.handleKeyInput(e, gameBoard.objectExist.bind(gameBoard))
   ); // si la funcion no es arrow function entonces hay que usar para para que reconozca la funcion en Gameboard.js
+
+  timer = setInterval(() => gameLoop(pacman), GLOBAL_SPEED);
 }
 
 // Initialize game
