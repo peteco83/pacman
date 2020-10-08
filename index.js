@@ -3,6 +3,7 @@ import { LEVEL, OBJECT_TYPE } from "./setup";
 // classes
 
 import GameBoard from "./GameBoard";
+import Pacman from "./Pacman";
 
 // DOM Elements
 
@@ -26,10 +27,28 @@ let gameWin = false;
 let powerPillActive = false;
 let powerPillTimer = null;
 
-const gameOver = (pacman, grid) => {};
+function gameOver(pacman, grid) {}
 
-const checkCollision = (pacman, ghosts) => {};
+function checkCollision(pacman, ghosts) {}
 
-const gameLoop = (pacman, ghosts) => {};
+function gameLoop(pacman, ghosts) {}
 
-const startGame = () => {};
+function startGame() {
+  gameWin = false;
+  powerPillActive = false;
+  score = 0;
+
+  startButton.classList.add("hide");
+
+  gameBoard.createGrid(LEVEL);
+
+  const pacman = new Pacman(2, 287);
+  gameBoard.addObject(287, [OBJECT_TYPE.PACMAN]);
+  document.addEventListener("keydown", (e) =>
+    pacman.handleKeyInput(e, gameBoard.objectExist.bind(gameBoard))
+  ); // si la funcion no es arrow function entonces hay que usar para para que reconozca la funcion en Gameboard.js
+}
+
+// Initialize game
+
+startButton.addEventListener("click", startGame);
